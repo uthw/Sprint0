@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint0_2.Game.Graphics;
 
-public class Sprite
+public class Sprite : ISprite
 {
     /// <summary>
     /// The color to tint the sprite with. Default is white (no tint).
@@ -51,5 +51,9 @@ public class Sprite
     public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
     {
         spriteBatch.Draw(Texture, position, SourceRectangle, Color, Rotation, Origin, Scale, Effects, 0.0f);
+    }
+
+    public virtual void Update(GameTime gameTime)
+    {
     }
 }

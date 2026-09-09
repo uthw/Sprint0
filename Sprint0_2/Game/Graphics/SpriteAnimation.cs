@@ -1,8 +1,9 @@
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Sprint0_2.Game.Graphics;
 
-public class SpriteAnimation
+public class SpriteAnimation : ISprite
 {
     // Sprite animation properties
     private readonly Sprite _sprite;
@@ -44,6 +45,11 @@ public class SpriteAnimation
             _currentFrame = (_currentFrame + 1) % _frameCount;
             UpdateSourceRectangle();
         }
+    }
+    
+    public void Draw(SpriteBatch spriteBatch, Vector2 position)
+    {
+        _sprite.Draw(spriteBatch, position);
     }
     
     /// <summary>
