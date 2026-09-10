@@ -30,14 +30,12 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
     protected override void LoadContent()
     {
-        // Create a SpriteBatch used to render textures
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
-
-        // Load player textures
-        SpriteFactory.Instance.LoadAllAssets(Content);
+        _spriteBatch = new SpriteBatch(GraphicsDevice); // Texture rendering
         
-        // Create a Player instance with the texture
-        _player = new Player();
+        SpriteFactory.Instance.LoadAllAssets(Content); // Player sprites
+        TextCreator.Initialize(Content);
+
+        _player.Sprite = SpriteFactory.Instance.CreateIdlePlayerSprite();
     }
 
     protected override void Update(GameTime gameTime)
@@ -56,6 +54,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
         GraphicsDevice.Clear(Color.CornflowerBlue);
         
         _spriteBatch.Begin();
+        TextCreator.CreateSprint0Text(Window, _spriteBatch);
         _player.Draw(_spriteBatch, new Vector2(100, 100));
         _spriteBatch.End();
 
