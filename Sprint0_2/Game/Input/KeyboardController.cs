@@ -6,7 +6,7 @@ namespace Sprint0_2.Game.Input;
 
 public class KeyboardController : IController
 {
-    private Dictionary<Keys, ICommand> _keyBindings = new Dictionary<Keys, ICommand>();
+    private Dictionary<Keys, ICommand> _keyBindings = new();
     
     public void RegisterCommand(Keys key, ICommand command)
     {

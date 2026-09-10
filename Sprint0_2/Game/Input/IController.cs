@@ -6,8 +6,5 @@ namespace Sprint0_2.Game.Input;
 
 public interface IController
 {
-    public void RegisterCommand(Keys key, ICommand command);
-    public void RemoveCommand(Keys key);
-
     public void Update();
 }

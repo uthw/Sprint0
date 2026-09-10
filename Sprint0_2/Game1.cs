@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Input;
 using Sprint0_2.Game.Command;
 using Sprint0_2.Game.Entity;
 using Sprint0_2.Game.Graphics;
+using Sprint0_2.Game.Input;
 
 namespace Sprint0_2;
 
@@ -11,8 +12,11 @@ public class Game1 : Microsoft.Xna.Framework.Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private Texture2D PlayerWalkTexture { get; set; }
+    
     private Player _player;
+    
+    private KeyboardController _keyboardController;
+    private MouseController _mouseController;
 
     public Game1()
     {
@@ -23,8 +27,15 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
     protected override void Initialize()
     {
-        // TODO: Add your initialization logic here
-
+        _keyboardController = new KeyboardController();
+        _mouseController = new MouseController();
+        
+        _player = new Player();
+        
+        // Bind commands to button presses
+        _keyboardController.RegisterCommand(Keys.D, new SetWalkingPlayerSpriteCommand(_player));
+        _mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
+        
         base.Initialize();
     }
 
@@ -45,6 +56,8 @@ public class Game1 : Microsoft.Xna.Framework.Game
             Exit();
         
         _player.Update(gameTime);
+        _mouseController.Update();
+        _keyboardController.Update();
 
         base.Update(gameTime);
     }
