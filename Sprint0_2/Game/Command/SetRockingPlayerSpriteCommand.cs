@@ -21,5 +21,6 @@ public class SetRockingPlayerSpriteCommand(Player player) : ICommand
         sprite.Scale = _scale;
 
         _player.Animation = new SpriteAnimation(sprite, _width, _height, _count, _duration);
+        _player.IsWalking = false;
     }
 }

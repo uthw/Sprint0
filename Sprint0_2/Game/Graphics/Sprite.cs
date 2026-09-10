@@ -52,6 +52,12 @@ public class Sprite : ISprite
     {
         spriteBatch.Draw(Texture, position, SourceRectangle, Color, Rotation, Origin, Scale, Effects, 0.0f);
     }
+    
+    public virtual void Draw(SpriteBatch spriteBatch, Vector2 position, bool isFlippedHorizontally)
+    {
+        Effects = isFlippedHorizontally ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+        Draw(spriteBatch, position);
+    }
 
     public virtual void Update(GameTime gameTime)
     {

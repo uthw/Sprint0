@@ -18,10 +18,13 @@ public class SetWalkingPlayerSpriteCommand(Player player) : ICommand
     
     public void Execute()
     {
+        if (_player.IsWalking) return;
         var sprite = SpriteFactory.Instance.CreateWalkingPlayerSprite();
         _player.Sprite = sprite;
         sprite.Scale = _scale;
 
         _player.Animation = new SpriteAnimation(sprite, _width, _height, _count, _duration);
+
+        _player.IsWalking = true;
     }
 }   

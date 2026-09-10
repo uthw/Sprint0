@@ -22,9 +22,10 @@ public class TextCreator
     {
         CreateText(
             """
-            Press D for walking and click for rocking chair
+            Use A/D for walking and click for rocking chair
             Credits
             Program made by: Uthman Wood
+            Font is Noto Sans from Google Fonts
             Sprites retrieved from Super Mario Wiki
             Gifs were converted to PNG sprite sheets using ImageMagick
             

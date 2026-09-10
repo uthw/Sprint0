@@ -33,9 +33,10 @@ public class Game1 : Microsoft.Xna.Framework.Game
         _player = new Player();
         
         // Bind commands to button presses
-        _keyboardController.RegisterCommand(Keys.D, new SetWalkingPlayerSpriteCommand(_player));
-        _mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
+        _keyboardController.RegisterCommand(Keys.D, new PlayerMoveRightCommand(_player));
+        _keyboardController.RegisterCommand(Keys.A, new PlayerMoveLeftCommand(_player));
         
+        _mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
         base.Initialize();
     }
 
@@ -68,7 +69,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
         
         _spriteBatch.Begin();
         TextCreator.CreateSprint0Text(Window, _spriteBatch);
-        _player.Draw(_spriteBatch, new Vector2(100, 100));
+        _player.Draw(_spriteBatch);
         _spriteBatch.End();
 
         base.Draw(gameTime);
