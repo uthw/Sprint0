@@ -22,7 +22,7 @@ public class TextCreator
     {
         CreateText(
             """
-            Use A/D for walking and click for rocking chair
+            Use A/D for walking, space to jump, and click for rocking chair
             Credits
             Program made by: Uthman Wood
             Font is Noto Sans from Google Fonts
