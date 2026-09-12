@@ -35,6 +35,7 @@ public class Game1 : Microsoft.Xna.Framework.Game
         // Bind commands to button presses
         _keyboardController.RegisterCommand(Keys.D, new PlayerMoveRightCommand(_player));
         _keyboardController.RegisterCommand(Keys.A, new PlayerMoveLeftCommand(_player));
+        _keyboardController.RegisterCommand(Keys.Space, new PlayerJumpCommand(_player));
         
         _mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
         base.Initialize();
