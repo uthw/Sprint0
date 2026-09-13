@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Sprint0_2.Game.Command;
@@ -14,9 +15,8 @@ public class Game1 : Microsoft.Xna.Framework.Game
     private SpriteBatch _spriteBatch;
     
     private Player _player;
-    
-    private KeyboardController _keyboardController;
-    private MouseController _mouseController;
+
+    private List<IController> _controllers;
 
     public Game1()
     {
@@ -27,17 +27,20 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
     protected override void Initialize()
     {
-        _keyboardController = new KeyboardController();
-        _mouseController = new MouseController();
+        var keyboardController = new KeyboardController();
+        var mouseController = new MouseController();
         
         _player = new Player();
         
         // Bind commands to button presses
-        _keyboardController.RegisterCommand(Keys.D, new PlayerMoveRightCommand(_player));
-        _keyboardController.RegisterCommand(Keys.A, new PlayerMoveLeftCommand(_player));
-        _keyboardController.RegisterCommand(Keys.Space, new PlayerJumpCommand(_player));
+        keyboardController.RegisterCommand(Keys.D, new PlayerMoveRightCommand(_player));
+        keyboardController.RegisterCommand(Keys.A, new PlayerMoveLeftCommand(_player));
+        keyboardController.RegisterCommand(Keys.Space, new PlayerJumpCommand(_player));
+        keyboardController.RegisterCommand(Keys.Escape, new ExitCommand(this));
         
-        _mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
+        mouseController.RegisterCommand(MouseButton.LeftButton, new SetRockingPlayerSpriteCommand(_player));
+        
+        _controllers = new List<IController> { keyboardController, mouseController };
         base.Initialize();
     }
 
@@ -53,13 +56,12 @@ public class Game1 : Microsoft.Xna.Framework.Game
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed ||
-            Keyboard.GetState().IsKeyDown(Keys.Escape))
-            Exit();
-        
         _player.Update(gameTime);
-        _mouseController.Update();
-        _keyboardController.Update();
+        
+        foreach (var controller in _controllers)
+        {
+            controller.Update();
+        }
 
         base.Update(gameTime);
     }
